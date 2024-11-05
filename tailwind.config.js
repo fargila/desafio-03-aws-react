@@ -2,7 +2,18 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary_text: '#18191f',
+        secondary_text: '#ffffff',
+        tertiary_text: '#d1d5db',
+        primary_color: '#09bc8a',
+        secondary_color: '#004346',
+        card_color: '#508991',
+        dark_green: '#172a3a',
+        main_red: '#992020'
+      }
+    },
   },
   plugins: [],
 }

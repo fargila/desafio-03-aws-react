@@ -9,8 +9,8 @@ const LoginPage = () => {
           <div className='flex justify-between'>
             <input className="border rounded-xl border-dark_green pl-3 py-3 w-11/12" 
             type="text" placeholder="Digite o @ do usuário" />
-            <button className='flex items-center justify-center  w-1/12
-            bg-secondary_color text-secondary_text ml-3 rounded-xl border-dark_green p-3 '>
+            <button className='flex items-center justify-center  w-1/12 hover:bg-primary_color transition duration-300 ease-in-out
+            bg-secondary_color text-secondary_text ml-3 rounded-xl border-dark_green p-3 border'>
               <FaArrowRight className='text-xl'/>
             </button>
           </div>
@@ -28,8 +28,8 @@ const LoginPage = () => {
       </div>
       <div className="flex items-center">
         <p className='mr-3 font-bold text-lg'>Acesse sua conta com</p>
-        <div className="flex justify-between hover:cursor-pointer 
-        bg-dark_green text-secondary_text px-4 py-2 rounded-full">
+        <div className="flex justify-between hover:cursor-pointer transition duration-300 ease-in-out
+        bg-dark_green text-secondary_text px-4 py-2 rounded-full hover:bg-primary_color">
           <FaGithub className='flex max-w-max'/>
           <p className='ml-2'>Github</p>
         </div>

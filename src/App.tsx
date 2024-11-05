@@ -1,3 +1,4 @@
+import CreateCard from "./components/CreateCardExp"
 import LoginPage from "./pages/LoginPage"
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   return (
     <>
       <LoginPage />
+      <CreateCard />
     </>
   )
 }

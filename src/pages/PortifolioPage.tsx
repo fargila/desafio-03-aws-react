@@ -1,4 +1,5 @@
 import { FaMapMarkerAlt } from 'react-icons/fa'
+import CardExperience from '../components/CardExperience'
 
 const PortifolioPage = () => {
   return (
@@ -54,6 +55,7 @@ const PortifolioPage = () => {
         </div>
         <div className='text-secondary_text bg-secondary_color w-full text-center mt-24'>
           <h1 className=' font-extrabold text-5xl py-10'>Experiências</h1>
+          <CardExperience />
         </div>
       </body>
       

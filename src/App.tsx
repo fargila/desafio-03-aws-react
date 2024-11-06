@@ -1,12 +1,14 @@
-import CreateCard from "./components/CreateCardExp"
-import LoginPage from "./pages/LoginPage"
+// import CreateCard from "./components/CreateCardExp"
+// import LoginPage from "./pages/LoginPage"
+import PortifolioPage from "./pages/PortifolioPage"
 
 function App() {
 
   return (
     <>
-      <LoginPage />
-      <CreateCard />
+      {/* <LoginPage />
+      <CreateCard /> */}
+      <PortifolioPage />
     </>
   )
 }

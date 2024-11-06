@@ -14,13 +14,13 @@ module.exports = {
         main_red: '#992020'
       },
       boxShadow: {
-        'left-bottom': '4px 4px 0px #09bc8a'
-      },
-      width: {
-        '1368': '1368px' 
+        'left-bottom': '4px 7px 0px #09bc8a'
       },
       height: {
-        '1664': '1664px'
+        '503': '503px'
+      },
+      width: {        
+        '409': '409px'
       }
     },
   },

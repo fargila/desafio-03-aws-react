@@ -12,6 +12,15 @@ module.exports = {
         card_color: '#508991',
         dark_green: '#172a3a',
         main_red: '#992020'
+      },
+      boxShadow: {
+        'left-bottom': '4px 4px 0px #09bc8a'
+      },
+      width: {
+        '1368': '1368px' 
+      },
+      height: {
+        '1664': '1664px'
       }
     },
   },

@@ -1,8 +1,9 @@
-
+import { toggle } from '../scripts/toggle.ts'
 
 const CardExperience = () => {
   return (
-    <div className="items-start border-4 border-dark_green flex flex-col bg-card_color w-409 mx-3 my-3
+    <div>
+      <div className="items-start border-4 border-dark_green flex flex-col bg-card_color w-409 mx-3 my-3
      text-secondary_text shadow-left-bottom ring-primary_color rounded-2xl p-5 h-503 justify-between flex-wrap">
       <div className="text-start">
         <h1 className="text-3xl font-bold">Projeto X</h1>
@@ -20,10 +21,11 @@ const CardExperience = () => {
       </div>
       
       <div className="flex justify-center w-full">
-        <a href="#" className="bg-dark_green text-xl font-medium rounded-md py-3 w-full
-        hover:bg-primary_color transition duration-300 ease-in-out">Ver repositório</a>
+        <button className="bg-dark_green text-xl font-medium rounded-md py-3 w-full
+        hover:bg-primary_color transition duration-300 ease-in-out" onClick={() => toggle()}>Ver repositório</button>
       </div>
       {/* <a href="#" className="bg-dark_green text-xl font-medium rounded-md py-3 self-center w-full self">Ver repositório</a> */}
+      </div>
     </div>
   )
 }

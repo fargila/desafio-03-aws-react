@@ -1,7 +1,8 @@
 
 const AddLink = () => {
+
   return (
-    <div className="flex flex-col justify-center items-center bg-slate-400 w-2/4 h-full pt-10 pb-6 rounded-2xl">
+    <div className="flex flex-col justify-center items-center bg-slate-400 w-2/4 h-full pt-10 pb-6 rounded-2xl" id="popup">
       <h1 className="w-3/4 font-extrabold flex items-start text-dark_green text-4xl mb-7">Adicionar link</h1>
       <input className="w-3/4 py-3 m-3 rounded-md border-dark_green pl-2 border" 
       type="text" placeholder="Digite a url"/>

@@ -70,13 +70,10 @@ const PortifolioPage = () => {
             <p className='text-xl font-medium w-11/12 text-tertiary_text hover:cursor-default
              transition duration-800 ease-in-out border-transparent border-b-2 hover:border-tertiary_text' ref={experience}>adicione sua história</p>
         </div>
-        <div className='text-secondary_text bg-secondary_color w-full text-center mt-24 pb-20'>
-          <h1 className=' font-extrabold text-7xl py-10'>Experiências</h1>
-          <div className='flex justify-center flex-wrap'>
-            <CardExperience />
-            <CardExperience />
-            <CardExperience />
-          </div>
+        <div className='text-secondary_text bg-secondary_color w-full text-center mt-24' id="blur">
+          <h1 className=' font-extrabold text-5xl py-10'>Experiências</h1>
+          <CardExperience />
+          <CardExperience/>
         </div>
       </body>
       

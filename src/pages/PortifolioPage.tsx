@@ -53,9 +53,10 @@ const PortifolioPage = () => {
               mollit anim id est laborum.
             </p>
         </div>
-        <div className='text-secondary_text bg-secondary_color w-full text-center mt-24'>
+        <div className='text-secondary_text bg-secondary_color w-full text-center mt-24' id="blur">
           <h1 className=' font-extrabold text-5xl py-10'>Experiências</h1>
           <CardExperience />
+          <CardExperience/>
         </div>
       </body>
       

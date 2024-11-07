@@ -14,13 +14,16 @@ body {
     height: 100vh;
 }
 
-#blur.active {
+.blured.active {
     filter: blur(20px);
     pointer-events: none;
     user-select: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-#popup {
+.popup {
     position: fixed;
     top: 40%;
     left: 50%;
@@ -30,7 +33,7 @@ body {
     transition: .5s;
 }
 
-#popup.active {
+.popup.active {
     top: 50%;
     visibility: hidden;
     opacity: 1;

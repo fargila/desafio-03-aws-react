@@ -2,17 +2,30 @@ import { FaMapMarkerAlt} from 'react-icons/fa'
 // FaCheck 
 import { MdEdit } from 'react-icons/md';
 import CardExperience from '../components/CardExperience'
+import { useRef } from 'react';
 
 const PortifolioPage = () => {
+  const start = useRef<HTMLBodyElement>(null);
+  const myHistory = useRef<HTMLDivElement>(null)
+  const experience = useRef<HTMLDivElement>(null)
+  const contact = useRef<HTMLDivElement>(null)
+
+  const scrollHandler = (elmRef:React.RefObject<HTMLElement>) =>
+  { window.scrollTo({top:elmRef.current?.offsetTop, behavior:'smooth'}) }
+
   return (
     <>
       <header className="flex sticky top-0 justify-end bg-dark_green
       text-secondary_text text-2xl py-4 rounded-b-3xl w-full">
         <div className="flex justify-evenly w-3/5 font-medium">
-          <button className='hover:text-primary_color transition duration-300 ease-in-out'>Início</button>
-          <button className='hover:text-primary_color transition duration-300 ease-in-out'>Minha história</button>
-          <button className='hover:text-primary_color transition duration-300 ease-in-out'>Experiências</button>
-          <button className='hover:text-primary_color transition duration-300 ease-in-out'>Contato</button>
+          <button className='hover:text-primary_color transition duration-300 ease-in-out' 
+          onClick={() => scrollHandler(start)}>Início</button>
+          <button className='hover:text-primary_color transition duration-300 ease-in-out' 
+          onClick={() => scrollHandler(myHistory)}>Minha história</button>
+          <button className='hover:text-primary_color transition duration-300 ease-in-out' 
+          onClick={() => scrollHandler(experience)}>Experiências</button>
+          <button className='hover:text-primary_color transition duration-300 ease-in-out' 
+          onClick={() => scrollHandler(contact)}>Contato</button>
           <div className="flex ml-10 ">
             <button className='hover:text-primary_color transition duration-300 ease-in-out'>Sair</button>
             <div className="bg-primary_color rounded-full p-8 ml-5"></div>
@@ -20,13 +33,13 @@ const PortifolioPage = () => {
         </div>
       </header>
 
-      <body className='flex justify-center items-center flex-col mt-16 h-auto'>
+      <body className='flex justify-center items-center flex-col mt-16 h-auto' ref={start}>
         <button className='fixed top-32 right-16 hover:bg-primary_color text-secondary_text size-20
         flex justify-center items-center self-end rounded-full bg-card_color transition duration-300 ease-in-out'>
           <MdEdit className='size-12'/>
           {/* <FaCheck/> */}
         </button>
-        <div className='flex justify-between items-center w-11/12'>
+        <div className='flex justify-between items-center w-11/12 h-auto'>
           <div className='text-center'>
             <div className="bg-primary_color rounded-full size-60"></div>
             <h2 className='text-5xl font-bold mt-2'>_fargila</h2>
@@ -41,7 +54,7 @@ const PortifolioPage = () => {
               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
               occaecat cupidatat non proident, sunt in culpa qui officia deserunt
               mollit anim id est laborum.</p>
-            <div className='text-secondary_text font-semibold flex just'>
+            <div className='text-secondary_text font-semibold flex just' ref={myHistory}>
               <button 
               className='bg-dark_green text-2xl w-1/4 py-3 mr-10 rounded-2xl shadow-left-bottom ring-primary_color
               hover:bg-primary_color transition duration-300 ease-in-out'>Github</button>
@@ -55,7 +68,7 @@ const PortifolioPage = () => {
         flex flex-col justify-center items-center py-10 rounded-2xl'>
             <h2 className='text-5xl font-bold w-11/12 mb-12'>Minha história</h2>
             <p className='text-xl font-medium w-11/12 text-tertiary_text hover:cursor-default
-             transition duration-800 ease-in-out border-transparent border-b-2 hover:border-tertiary_text'>adicione sua história</p>
+             transition duration-800 ease-in-out border-transparent border-b-2 hover:border-tertiary_text' ref={experience}>adicione sua história</p>
         </div>
         <div className='text-secondary_text bg-secondary_color w-full text-center mt-24 pb-20'>
           <h1 className=' font-extrabold text-7xl py-10'>Experiências</h1>
@@ -68,7 +81,7 @@ const PortifolioPage = () => {
       </body>
       
       <footer className="text-primary_text">
-        <div className="bg-dark_green text-secondary_text py-32 flex flex-col items-center">
+        <div className="bg-dark_green text-secondary_text py-32 flex flex-col items-center" ref={contact}>
           <h3 className="text-4xl font-semibold text-center">Sinta-se livre para me contatar a qualquer momento!</h3>
           <h2 className="border-b-4 border-transparent hover:border-tertiary_text text-tertiary_text
            text-5xl mt-10 font-bold hover:cursor-default transition duration-300 ease-in-out">Adicione um e-mail extra</h2>

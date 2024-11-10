@@ -1,13 +1,35 @@
 import { FaMapMarkerAlt, FaCheck } from 'react-icons/fa'
-// FaCheck 
+import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import CardExperience from '../components/CardExperience'
 import CreateCard from '../components/CreateCardExp';
 import AddCardExp from '../components/AddCardExp'
-import { edit, toggle } from '../scripts/toggle';
+import { edit, socialLink } from '../scripts/toggle';
+import AddLink from '../components/AddLink'
+import EditCardExp from '../components/EditCardExp'
+import { CardData } from '../components/CreateCardExp';
 
-const PortifolioPage = () => {
+const PortifolioPage = () => 
+{
+  const [cards, setCards] = useState<CardData[]>([]);
+  const [cardIndex, setCardIndex] = useState(NaN)
   
+  const addNewCard = (newCard: CardData) => { setCards([...cards, newCard])}
+
+  const updateCard = (i: number, update: CardData) => 
+  {
+    const updatedCards = [...cards]
+    updatedCards[i] = update
+    setCards(updatedCards)
+  }
+
+  const editCard = (index: number) => {
+    setCardIndex(index)
+  }
+
+  const deleteCard = (index: number) => { setCards(cards.filter((_, i) => i !== index)) }
+  console.log(cardIndex)
+
   return (
     <>
       <header className="flex sticky top-0 justify-end bg-dark_green z-10
@@ -53,7 +75,8 @@ const PortifolioPage = () => {
               hover:bg-primary_color transition duration-300 ease-in-out'>Github</button>
               <div className='relative w-full'>
                 <button className='showLinkIn bg-card_color rounded-full size-5 flex justify-center items-center
-                absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}><MdEdit/></button>
+                absolute transition duration-300 ease-in-out hover:bg-primary_color' 
+                onClick={() => socialLink('linkedin')}><MdEdit/></button>
                 <button 
                 className='bg-dark_green text-2xl w-full py-3 rounded-2xl shadow-left-bottom ring-primary_color
                 hover:bg-primary_color transition duration-300 ease-in-out showEdit'>LinkIn</button>
@@ -65,21 +88,28 @@ const PortifolioPage = () => {
         flex flex-col justify-center items-center py-10 rounded-2xl'>
             <h2 className='text-5xl font-bold w-11/12 mb-12'>Minha história</h2>
             <p className='text-xl font-medium w-11/12 text-tertiary_text hover:cursor-default
-             transition duration-800 ease-in-out border-transparent border-b-2 hover:border-tertiary_text'>adicione sua história</p>
+             transition duration-800 ease-in-out border-transparent border-b-2 
+             hover:border-tertiary_text'>adicione sua história</p>
         </div>
+
+        <div className='blured'/>
+        <CreateCard onAddCard={addNewCard}/>
+        {cardIndex !== null && <EditCardExp card={cards[cardIndex]} index={cardIndex} onUpdateCard={updateCard}/>}
+        <AddLink />
         
         <div className='text-secondary_text bg-secondary_color w-full text-center mt-24 pb-20'>
           <h1 className=' font-extrabold text-7xl py-10'>Experiências</h1>
           <div className='flex justify-center flex-wrap'>
-            <CardExperience />
+            {cards.map((card, index) => (
+              <CardExperience key={index} projectName={card.projectName} duration={card.duration} skills={card.skills}
+              description={card.description} repLink={card.repLink} onDelete={() => deleteCard(index)} onFocus={() => editCard(index)}/>
+            ))}
+            
             {/* <CardExperience />
             <CardExperience /> */}
-            <AddCardExp />
+            <AddCardExp/>
           </div>
         </div>
-
-        <div className='blured'></div>
-        <CreateCard />
       </body>
       
       <footer className="text-primary_text h-auto">
@@ -89,35 +119,60 @@ const PortifolioPage = () => {
            text-5xl mt-10 font-bold hover:cursor-default transition duration-300 ease-in-out">Adicione um e-mail extra</h2>
         </div>
         <div className="flex flex-col items-center text-center">
-          <h3 className="text-4xl w-3/4 font-medium my-28">Assim que possível, me envie um e-mail para que possamos trabalhar felizes juntos!</h3>
+          <h3 className="text-4xl w-3/4 font-medium my-28">Assim que possível
+          , me envie um e-mail para que possamos trabalhar felizes juntos!</h3>
           <div className="flex justify-around text-secondary_text text-center">
             <div className='relative'>
               <button className='showEdit1 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg1"
-              src="/src/assets/images/Property 1=insta black.png" alt="Instagram" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('instagram')}>
+                <MdEdit/>
+              </button>
+              <div className='mx-1 relative'>
+                <img src="/src/assets/images/Property 1=insta black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=insta color.png" alt="Instagram" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit2 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg2"
-              src="/src/assets/images/Property 1=facebook black.png" alt="Facebook" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('facebook')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=facebook black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=facebook color.png" alt="Facebook" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit3 bg-card_color rounded-full size-5 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg3"
-              src="/src/assets/images/Property 1=twitter black.png" alt="Twitter" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('twitter')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=twitter black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=twitter color.png" alt="Twitter" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit4 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg4"
-              src="/src/assets/images/Property 1=youtube black.png" alt="Youtube" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('youtube')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=youtube black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=youtube color.png" alt="Youtube" />
+              </div>
             </div>
           </div>
           <div className="flex pt-12 pb-8 text-2xl font-medium w-3/4 justify-center">
@@ -125,7 +180,7 @@ const PortifolioPage = () => {
               <FaMapMarkerAlt />
               <p className='ml-3'>Brasil</p>
             </div>
-            <p className=''>&copy; 2024, All Rights By Compass Uol</p>
+            <p>&copy; 2024, All Rights By Compass Uol</p>
           </div>
         </div>
       </footer>

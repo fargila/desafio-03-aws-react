@@ -554,6 +554,10 @@ video {
   display: none;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .fixed {
   position: fixed;
 }
@@ -586,8 +590,16 @@ video {
   top: 8rem;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .z-10 {
   z-index: 10;
+}
+
+.z-30 {
+  z-index: 30;
 }
 
 .m-3 {
@@ -789,12 +801,24 @@ video {
   max-width: max-content;
 }
 
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .flex-col {
   flex-direction: column;
 }
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
 }
 
 .items-start {
@@ -835,6 +859,18 @@ video {
 
 .self-end {
   align-self: flex-end;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .rounded-2xl {
@@ -941,14 +977,13 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-slate-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
-}
-
 .bg-unspoken_color {
   --tw-bg-opacity: 1;
   background-color: rgb(9 64 77 / var(--tw-bg-opacity));
+}
+
+.bg-cover {
+  background-size: cover;
 }
 
 .p-1 {
@@ -1127,6 +1162,14 @@ video {
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
 .shadow-left-bottom {
   --tw-shadow: 4px 7px 0px #09bc8a;
   --tw-shadow-colored: 4px 7px 0px var(--tw-shadow-color);
@@ -1138,10 +1181,20 @@ video {
   --tw-ring-color: rgb(9 188 138 / var(--tw-ring-opacity));
 }
 
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -1165,6 +1218,33 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+/* Scrollbar------------------------------------------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 0;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 40px;
+  background: #888;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ------------------------------------------------------------------------------------------------------- */
 
 .cardEdit {
   width: 100%;
@@ -1220,6 +1300,8 @@ body {
   transition: .5s;
 }
 
+/* PopUps------------------------------------------------------------------------------------------------ */
+
 .popup {
   display: flex;
   align-items: center;
@@ -1241,6 +1323,48 @@ body {
   transition: .5s;
 }
 
+.popupSocial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+  width: 100%;
+}
+
+.popupSocial.active {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: .5s;
+}
+
+.popupEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+  width: 100%;
+}
+
+.popupEdit.active {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: .5s;
+}
+
 .showLinkIn {
   top: 0px;
   left: 96%;
@@ -1249,6 +1373,12 @@ body {
 .showEdit1,.showEdit2,.showEdit3,.showEdit4 {
   top: 15px;
   right: 18%;
+}
+
+.hover\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hover\:cursor-default:hover {
@@ -1302,4 +1432,8 @@ body {
 .hover\:text-unspoken_color:hover {
   --tw-text-opacity: 1;
   color: rgb(9 64 77 / var(--tw-text-opacity));
+}
+
+.hover\:opacity-100:hover {
+  opacity: 1;
 }

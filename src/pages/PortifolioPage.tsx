@@ -4,7 +4,9 @@ import { MdEdit } from 'react-icons/md';
 import CardExperience from '../components/CardExperience'
 import CreateCard from '../components/CreateCardExp';
 import AddCardExp from '../components/AddCardExp'
-import { edit, toggle } from '../scripts/toggle';
+import { edit, socialLink } from '../scripts/toggle';
+import AddLink from '../components/AddLink'
+import EditCardExp from '../components/EditCardExp'
 
 const PortifolioPage = () => {
   
@@ -53,7 +55,7 @@ const PortifolioPage = () => {
               hover:bg-primary_color transition duration-300 ease-in-out'>Github</button>
               <div className='relative w-full'>
                 <button className='showLinkIn bg-card_color rounded-full size-5 flex justify-center items-center
-                absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}><MdEdit/></button>
+                absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}><MdEdit/></button>
                 <button 
                 className='bg-dark_green text-2xl w-full py-3 rounded-2xl shadow-left-bottom ring-primary_color
                 hover:bg-primary_color transition duration-300 ease-in-out showEdit'>LinkIn</button>
@@ -74,12 +76,13 @@ const PortifolioPage = () => {
             <CardExperience />
             {/* <CardExperience />
             <CardExperience /> */}
-            <AddCardExp />
+            <AddCardExp/>
           </div>
         </div>
 
         <div className='blured'></div>
         <CreateCard />
+        <EditCardExp />
       </body>
       
       <footer className="text-primary_text h-auto">
@@ -92,29 +95,33 @@ const PortifolioPage = () => {
           <h3 className="text-4xl w-3/4 font-medium my-28">Assim que possível, me envie um e-mail para que possamos trabalhar felizes juntos!</h3>
           <div className="flex justify-around text-secondary_text text-center">
             <div className='relative'>
+              <AddLink />
               <button className='showEdit1 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
+              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
                 <MdEdit/></button>
               <img className="mx-1 editImg1"
               src="/src/assets/images/Property 1=insta black.png" alt="Instagram" />
             </div>
             <div className='relative'>
+              <AddLink />
               <button className='showEdit2 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
+              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
                 <MdEdit/></button>
               <img className="mx-1 editImg2"
               src="/src/assets/images/Property 1=facebook black.png" alt="Facebook" />
             </div>
             <div className='relative'>
+              <AddLink />
               <button className='showEdit3 bg-card_color rounded-full size-5 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
+              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
                 <MdEdit/></button>
               <img className="mx-1 editImg3"
               src="/src/assets/images/Property 1=twitter black.png" alt="Twitter" />
             </div>
             <div className='relative'>
+              <AddLink />
               <button className='showEdit4 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={toggle}>
+              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
                 <MdEdit/></button>
               <img className="mx-1 editImg4"
               src="/src/assets/images/Property 1=youtube black.png" alt="Youtube" />
@@ -125,7 +132,7 @@ const PortifolioPage = () => {
               <FaMapMarkerAlt />
               <p className='ml-3'>Brasil</p>
             </div>
-            <p className=''>&copy; 2024, All Rights By Compass Uol</p>
+            <p>&copy; 2024, All Rights By Compass Uol</p>
           </div>
         </div>
       </footer>

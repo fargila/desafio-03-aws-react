@@ -590,6 +590,10 @@ video {
   z-index: 10;
 }
 
+.z-30 {
+  z-index: 30;
+}
+
 .m-3 {
   margin: 0.75rem;
 }
@@ -941,11 +945,6 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-slate-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
-}
-
 .bg-unspoken_color {
   --tw-bg-opacity: 1;
   background-color: rgb(9 64 77 / var(--tw-bg-opacity));
@@ -1220,6 +1219,8 @@ body {
   transition: .5s;
 }
 
+/* PopUps------------------------------------------------------------------------------------------------ */
+
 .popup {
   display: flex;
   align-items: center;
@@ -1240,6 +1241,50 @@ body {
   opacity: 1;
   transition: .5s;
 }
+
+.popupSocial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+  width: 100%;
+}
+
+.popupSocial.active {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: .5s;
+}
+
+.popupEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+  width: 100%;
+}
+
+.popupEdit.active {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: .5s;
+}
+
+/* ------------------------------------------------------------------------------------------------------- */
 
 .showLinkIn {
   top: 0px;

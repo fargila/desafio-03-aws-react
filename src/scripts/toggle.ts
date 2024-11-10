@@ -18,7 +18,7 @@ export function toggle()
     popup?.classList.toggle('active')
 }
 
-export function socialLink()
+export function socialLink(socialMedia: string)
 {
     const blured = document.querySelector('.blured')
     blured?.classList.toggle('active')

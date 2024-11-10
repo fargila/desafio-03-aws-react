@@ -75,7 +75,8 @@ const PortifolioPage = () =>
               hover:bg-primary_color transition duration-300 ease-in-out'>Github</button>
               <div className='relative w-full'>
                 <button className='showLinkIn bg-card_color rounded-full size-5 flex justify-center items-center
-                absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}><MdEdit/></button>
+                absolute transition duration-300 ease-in-out hover:bg-primary_color' 
+                onClick={() => socialLink('linkedin')}><MdEdit/></button>
                 <button 
                 className='bg-dark_green text-2xl w-full py-3 rounded-2xl shadow-left-bottom ring-primary_color
                 hover:bg-primary_color transition duration-300 ease-in-out showEdit'>LinkIn</button>
@@ -123,31 +124,55 @@ const PortifolioPage = () =>
           <div className="flex justify-around text-secondary_text text-center">
             <div className='relative'>
               <button className='showEdit1 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg1"
-              src="/src/assets/images/Property 1=insta black.png" alt="Instagram" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('instagram')}>
+                <MdEdit/>
+              </button>
+              <div className='mx-1 relative'>
+                <img src="/src/assets/images/Property 1=insta black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=insta color.png" alt="Instagram" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit2 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg2"
-              src="/src/assets/images/Property 1=facebook black.png" alt="Facebook" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('facebook')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=facebook black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=facebook color.png" alt="Facebook" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit3 bg-card_color rounded-full size-5 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg3"
-              src="/src/assets/images/Property 1=twitter black.png" alt="Twitter" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('twitter')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=twitter black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=twitter color.png" alt="Twitter" />
+              </div>
             </div>
             <div className='relative'>
               <button className='showEdit4 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color' onClick={socialLink}>
-                <MdEdit/></button>
-              <img className="mx-1 editImg4"
-              src="/src/assets/images/Property 1=youtube black.png" alt="Youtube" />
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
+              onClick={() => socialLink('youtube')}>
+                <MdEdit/>
+              </button>
+              <div className='relative mx-1'>
+                <img src="/src/assets/images/Property 1=youtube black.png" />
+                <img className='absolute transition top-0 left-0 cursor-pointer
+                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                src="/src/assets/images/Property 1=youtube color.png" alt="Youtube" />
+              </div>
             </div>
           </div>
           <div className="flex pt-12 pb-8 text-2xl font-medium w-3/4 justify-center">

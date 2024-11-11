@@ -1,15 +1,12 @@
-// import CreateCard from "./components/CreateCardExp"
-// import LoginPage from "./pages/LoginPage"
-import PortifolioPage from "./pages/PortifolioPage"
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
 
   return (
-    <>
-      {/* <LoginPage />
-      <CreateCard /> */}
-      <PortifolioPage />
-    </>
+    <Router>
+     <AppRoutes/>
+    </Router>
   )
 }
 

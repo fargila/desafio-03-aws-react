@@ -38,11 +38,23 @@ export function editToggle()
 {
     const blured = document.querySelector('.blured')
     blured?.classList.toggle('active')
-    
-    // const cardEdit = document.querySelector('.cardEdit')
-    // cardEdit?.classList.toggle('active')
 
     const popupEdit = document.querySelector('.popupEdit')
     popupEdit?.classList.toggle('active')
 
+}
+
+export const toSection = (sectionId: string) => 
+{
+    const section = document.getElementById(sectionId)
+    if (!section) return
+    
+    if(sectionId === 'start') 
+    {  window.scroll({ top: section.offsetTop, behavior: 'smooth' }) }
+    else if(sectionId === 'myHistory') 
+    {  window.scroll({ top: section.offsetTop - 120, behavior: 'smooth' }) }
+    else if(sectionId === 'exp') 
+    {  window.scroll({ top: section.offsetTop - 72, behavior: 'smooth' }) }
+    else if(sectionId === 'contact') 
+    {  window.scroll({ top: section.offsetTop - 40, behavior: 'smooth' }) }
 }

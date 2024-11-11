@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { FaGithub, FaArrowRight, FaExclamationTriangle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
+  const [user, setUser] = useState('')
+  
+  //Infelizmente, não consegui fazer a tempo a lógica de validação firebase, então
+  //o site foi feito com a minha própia API do Github.
   return (
     <div className="flex justify-center items-center flex-col h-screen">
       <div>
@@ -8,17 +14,23 @@ const LoginPage = () => {
         <div>
           <div className='flex justify-between'>
             <input className="border rounded-xl border-dark_green pl-3 py-3 w-11/12" 
-            type="text" placeholder="Digite o @ do usuário" />
-            <button className='flex items-center justify-center  w-1/12 hover:bg-primary_color transition duration-300 ease-in-out
-            bg-secondary_color text-secondary_text ml-3 rounded-xl border-dark_green p-3 border'>
-              <FaArrowRight className='text-xl'/>
+            type="text" placeholder="Digite o @ do usuário" value={user}
+            onChange={(e) => setUser(e.target.value)}/>
+            <button className='w-1/12' disabled={!user.trim()}>
+              <Link to='/' className='flex items-center justify-center  w-full hover:bg-primary_color 
+              transition duration-300 ease-in-outbg-secondary_color text-secondary_text ml-3
+              rounded-xl border-dark_green bg-secondary_color p-3 border '>
+                <FaArrowRight className='text-xl'/>
+              </Link>
             </button>
           </div>
-          <div className='flex self-start mt-2'>
-            <FaExclamationTriangle className='text-main_red'/>
-            <small className='text-main_red font-bold text-sm ml-2 text-center'>
+          {!user.trim() && (
+            <div className='flex self-start mt-2'>
+              <FaExclamationTriangle className='text-main_red'/>
+              <small className='text-main_red font-bold text-sm ml-2 text-center'>
               O nome que você digitou não existe ou não está cadastrado!</small>
-          </div>
+            </div>
+          )}
         </div>
         <div className='flex items-center justify-center'>
           <hr className='border border-secondary_color w-2/4 border-t-2'></hr>

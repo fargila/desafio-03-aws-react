@@ -1,12 +1,16 @@
 export function edit()
 {    
-    const showEdit = document.querySelector('.showEdit')
     const editIcon = document.querySelector('.iconEdit')
     const checkIcon = document.querySelector('.iconCheck')
+    const showEdit = document.querySelectorAll('.showEdit')
+    const showEdition = document.querySelector('.showEdition')
+    const cardEdit = document.querySelector('.cardEdit')
 
     checkIcon?.classList.toggle('active')
     editIcon?.classList.toggle('active')
-    showEdit?.classList.toggle('active')
+    showEdit.forEach(item => { item.classList.toggle('active') })
+    showEdition?.classList.toggle('active')
+    cardEdit?.classList.toggle('active')
 }
 
 export function toggle() 
@@ -18,7 +22,7 @@ export function toggle()
     popup?.classList.toggle('active')
 }
 
-export function socialLink(socialMedia: string)
+export function socialLink()
 {
     const blured = document.querySelector('.blured')
     blured?.classList.toggle('active')
@@ -35,8 +39,8 @@ export function editToggle()
     const blured = document.querySelector('.blured')
     blured?.classList.toggle('active')
     
-    const cardEdit = document.querySelector('.cardEdit')
-    cardEdit?.classList.toggle('active')
+    // const cardEdit = document.querySelector('.cardEdit')
+    // cardEdit?.classList.toggle('active')
 
     const popupEdit = document.querySelector('.popupEdit')
     popupEdit?.classList.toggle('active')

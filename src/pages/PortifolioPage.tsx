@@ -1,5 +1,5 @@
 import { FaMapMarkerAlt, FaCheck } from 'react-icons/fa'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import CardExperience from '../components/CardExperience'
 import CreateCard from '../components/CreateCardExp';
@@ -8,12 +8,45 @@ import { edit, socialLink } from '../scripts/toggle';
 import AddLink from '../components/AddLink'
 import EditCardExp from '../components/EditCardExp'
 import { CardData } from '../components/CreateCardExp';
+import { Links } from '../components/AddLink';
+import axios from 'axios'
+
+interface User {
+  avatar_url: string
+  login: string
+  location: string
+  email: string
+  name: string
+  bio: string
+  html_url: string
+}
 
 const PortifolioPage = () => 
 {
-  const [cards, setCards] = useState<CardData[]>([]);
+  const [cards, setCards] = useState<CardData[]>([])
   const [cardIndex, setCardIndex] = useState(NaN)
+  const [user, setUser] = useState<User>()
+  const [savedLinks, setSavedLinks] = useState<Links>({})
+  //const [username, setUsername] = useState('')
+  //const [error, setError] = useState('null')
+
+  useEffect(() => {
+    const fetchUser = async () => 
+    {
+      try {
+        const response = await axios.get(`https://api.github.com/users/fargila`)
+        setUser(response.data)
+      } catch (error) {
+        console.error('Erro:', error)
+      }
+    }
   
+    fetchUser()
+  }, [])
+  
+  const saveLink = (platform: keyof Links, link: string) => 
+    { setSavedLinks((prevLinks) => ({ ...prevLinks, [platform]: link })) }
+
   const addNewCard = (newCard: CardData) => { setCards([...cards, newCard])}
 
   const updateCard = (i: number, update: CardData) => 
@@ -29,7 +62,8 @@ const PortifolioPage = () =>
 
   const deleteCard = (index: number) => { setCards(cards.filter((_, i) => i !== index)) }
   console.log(cardIndex)
-
+  console.log(savedLinks)
+  
   return (
     <>
       <header className="flex sticky top-0 justify-end bg-dark_green z-10
@@ -56,30 +90,34 @@ const PortifolioPage = () =>
         </button>
         <div className='flex justify-between items-center w-11/12'>
           <div className='text-center'>
-            <div className="bg-primary_color rounded-full size-60"></div>
-            <h2 className='text-5xl font-bold mt-2'>_fargila</h2>
-            <p className='text-xl font-medium mt-2'>Paraíba, PB</p>
-            <p className='text-xl font-medium mt-2'>AqueleCara@email.com</p>
+            <div className=" rounded-full size-60">
+              <img className='rounded-full w-full border-2 border-r-8 border-e-8 border-primary_text
+              h-auto' src={user?.avatar_url} alt="" />
+            </div>
+            <h2 className='text-5xl font-bold mt-2'>{user?.login}</h2>
+            {user?.location ? (<p className='text-xl font-medium mt-2'>{user?.location}</p>) : null}
+            {user?.email ? (<p className='text-xl font-medium mt-2'>{user?.email}</p>) : null}
+            {/* <p className='text-xl font-medium mt-2'>AqueleCara@email.com</p> */}
           </div>
           <div className='flex flex-col w-2/5'>
             <h2 className='text-5xl font-bold'>Hello,</h2>
-            <h2 className='text-5xl font-bold'>I'm Aquele Cara</h2>
-            <p className='text-xl font-medium py-7'>
-              Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-              occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.</p>
+            {user?.name ? (<p className='text-5xl font-bold mt-2 flex items-center'>I'm 
+            <p className='text-primary_color ml-3  flex flex-nowrap'>
+              {user?.name}</p></p>) : null}
+            {/* <h2 className='text-5xl font-bold'>I'm Aquele Cara</h2> */}
+            {user?.bio ? (<p className='text-xl font-medium py-7'>{user?.bio}</p>) : null}
             <div className='text-secondary_text font-semibold flex w-full'>
               <button 
               className='bg-dark_green text-2xl w-3/4 py-3 mr-10 rounded-2xl shadow-left-bottom ring-primary_color
-              hover:bg-primary_color transition duration-300 ease-in-out'>Github</button>
-              <div className='relative w-full'>
+              hover:bg-primary_color transition duration-300 ease-in-out' 
+              onClick={() => window.open(user?.html_url)}>Github</button>
+              <div className='relative w-full showEdit'>
                 <button className='showLinkIn bg-card_color rounded-full size-5 flex justify-center items-center
                 absolute transition duration-300 ease-in-out hover:bg-primary_color' 
-                onClick={() => socialLink('linkedin')}><MdEdit/></button>
+                onClick={socialLink}><MdEdit/></button>
                 <button 
                 className='bg-dark_green text-2xl w-full py-3 rounded-2xl shadow-left-bottom ring-primary_color
-                hover:bg-primary_color transition duration-300 ease-in-out showEdit'>LinkIn</button>
+                hover:bg-primary_color transition duration-300 ease-in-out'>LinkIn</button>
               </div>
             </div>
           </div>
@@ -95,7 +133,7 @@ const PortifolioPage = () =>
         <div className='blured'/>
         <CreateCard onAddCard={addNewCard}/>
         {cardIndex !== null && <EditCardExp card={cards[cardIndex]} index={cardIndex} onUpdateCard={updateCard}/>}
-        <AddLink />
+        <AddLink onSaveLink={saveLink} />
         
         <div className='text-secondary_text bg-secondary_color w-full text-center mt-24 pb-20'>
           <h1 className=' font-extrabold text-7xl py-10'>Experiências</h1>
@@ -122,10 +160,10 @@ const PortifolioPage = () =>
           <h3 className="text-4xl w-3/4 font-medium my-28">Assim que possível
           , me envie um e-mail para que possamos trabalhar felizes juntos!</h3>
           <div className="flex justify-around text-secondary_text text-center">
-            <div className='relative'>
-              <button className='showEdit1 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
-              onClick={() => socialLink('instagram')}>
+            <div className='relative showEdit'>
+              <button className='bg-card_color top-4 right-4 rounded-full size-5  flex justify-center items-center
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
+              onClick={socialLink}>
                 <MdEdit/>
               </button>
               <div className='mx-1 relative'>
@@ -135,10 +173,10 @@ const PortifolioPage = () =>
                 src="/src/assets/images/Property 1=insta color.png" alt="Instagram" />
               </div>
             </div>
-            <div className='relative'>
-              <button className='showEdit2 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
-              onClick={() => socialLink('facebook')}>
+            <div className='relative showEdit'>
+              <button className='bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
+              onClick={socialLink}>
                 <MdEdit/>
               </button>
               <div className='relative mx-1'>
@@ -148,10 +186,10 @@ const PortifolioPage = () =>
                 src="/src/assets/images/Property 1=facebook color.png" alt="Facebook" />
               </div>
             </div>
-            <div className='relative'>
-              <button className='showEdit3 bg-card_color rounded-full size-5 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
-              onClick={() => socialLink('twitter')}>
+            <div className='relative showEdit'>
+              <button className=' bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
+              onClick={socialLink}>
                 <MdEdit/>
               </button>
               <div className='relative mx-1'>
@@ -161,18 +199,27 @@ const PortifolioPage = () =>
                 src="/src/assets/images/Property 1=twitter color.png" alt="Twitter" />
               </div>
             </div>
-            <div className='relative'>
-              <button className='showEdit4 bg-card_color rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-30' 
-              onClick={() => socialLink('youtube')}>
+            <div className='relative showEdit'>
+              <button className='bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
+              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
+              onClick={socialLink}>
                 <MdEdit/>
               </button>
-              <div className='relative mx-1'>
-                <img src="/src/assets/images/Property 1=youtube black.png" />
-                <img className='absolute transition top-0 left-0 cursor-pointer
-                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                src="/src/assets/images/Property 1=youtube color.png" alt="Youtube" />
+              { savedLinks.youtube ? (
+                <div className='relative mx-1 visible'>
+                  <img src="/src/assets/images/Property 1=youtube black.png" />
+                  <img className='absolute transition top-0 left-0 cursor-pointer 
+                  duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                  src="/src/assets/images/Property 1=youtube color.png" alt="Youtube"
+                  onClick={() => window.open(savedLinks.youtube)} />
+                </div>) : (
+                <div className='relative mx-1'>
+                  <img src="/src/assets/images/Property 1=youtube black.png" />
+                  <img className='absolute transition top-0 left-0 cursor-pointer
+                  duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
+                  src="/src/assets/images/Property 1=youtube color.png" alt="Youtube" />
               </div>
+              )}
             </div>
           </div>
           <div className="flex pt-12 pb-8 text-2xl font-medium w-3/4 justify-center">

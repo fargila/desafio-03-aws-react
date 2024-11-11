@@ -16,39 +16,46 @@ body {
 
 /* Scrollbar------------------------------------------------------------------------------------------------ */
 ::-webkit-scrollbar {
-    width: 0;
-    visibility: hidden;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    width: 0px;
 }
 
 ::-webkit-scrollbar-track {
-    /* background: #f1f1f1; */
-    border-radius: 0px;
-
+    background: #ffffff
 }
 
 ::-webkit-scrollbar-thumb {
     height: 40px;
-    background: #888;
+    background: #09bc8a;
     border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #004346;
 }
 /* ------------------------------------------------------------------------------------------------------- */
-
 .cardEdit {
+    visibility: hidden;
+}
+
+.cardEdit.active {
+    visibility: visible;
     width: 100%;
     height: 100%;
     opacity: 0;
     transition: opacity .3s ease, visibility 0s .3s;
 }
 
-.cardEdit:hover {
+.cardEdit.active:hover {
+    visibility: visible;
     opacity: 1;
+}
+
+.showEdition.active {
+    overflow-y: auto;
+}
+
+.showEdition {
+    overflow: hidden;
 }
 
 .iconEdit, .iconCheck {
@@ -167,4 +174,16 @@ body {
 .showEdit1,.showEdit2,.showEdit3,.showEdit4 {
     top: 15px;
     right: 18%;
+}
+
+.showEdit {
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease-in-out;
+}
+
+.showEdit.active {
+    opacity: 100;
+    visibility: visible;
+    transition: .3s ease-in-out;
 }

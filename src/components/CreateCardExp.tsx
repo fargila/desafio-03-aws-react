@@ -24,8 +24,8 @@ const CreateCard: React.FC<CreateCardProps> = ({onAddCard}) =>
 
   const handleSubmit = (e: React.FormEvent) => 
   {
-    e.preventDefault();
-    const skillsArray = skills.split(',').map(skill => skill.trim());
+    e.preventDefault()
+    const skillsArray = skills.split(',').map(skill => skill.trim())
     
     if(projectName.length!=0 && duration.length!=0 && skills.length!=0 && description.length!=0)
     {
@@ -40,6 +40,9 @@ const CreateCard: React.FC<CreateCardProps> = ({onAddCard}) =>
     setDescription('')
     setRepLink('')
   }
+  
+  const validateInputs = () => 
+  {return !(projectName && duration && skills && description)}
 
   return (
     <div className="popup z-30">
@@ -51,7 +54,7 @@ const CreateCard: React.FC<CreateCardProps> = ({onAddCard}) =>
         type="text" placeholder="Título" onChange={(e) => setProjectName(e.target.value)} value={projectName}/>
         <input className="w-3/4 py-3 m-3 rounded-md border-dark_green pl-2 border font-medium"
         type="text" placeholder="Período de atuação" onChange={(e) => setDuration(e.target.value)} value={duration}/>
-        <textarea className="w-3/4 py-3 m-3 rounded-md border-dark_green pl-2 border font-medium"
+        <input type="text" className="w-3/4 py-3 m-3 rounded-md border-dark_green pl-2 border font-medium"
         placeholder="Habilidades (Separe-as por vírugla)" onChange={(e) => setSkills(e.target.value)} value={skills}/>
         <textarea className="w-3/4 py-3 m-3 rounded-md border-dark_green pl-2 border font-medium"
         placeholder="Descreva a sua experiência" onChange={(e) => setDescription(e.target.value)} value={description}/>
@@ -60,8 +63,10 @@ const CreateCard: React.FC<CreateCardProps> = ({onAddCard}) =>
         <div className="flex justify-between w-3/4 py-3 mt-3">
           <button className="w-1/2 border py-3 rounded-md font-bold transition duration-300 ease-in-out
           border-dark_green mr-4 hover:bg-main_red hover:text-secondary_text" onClick={toggle}>Cancelar</button>
-          <button className="w-1/2 py-3 rounded-md font-bold transition duration-300 ease-in-out
-          bg-dark_green text-secondary_text hover:bg-primary_color" type="submit">Salvar</button>
+          <button disabled={validateInputs()} 
+          className={`${validateInputs()  ? 'cursor-default bg-tertiary_text text-secondary_text' : 
+          'transition duration-300 ease-in-outbg-dark_green text-secondary_text hover:bg-primary_color'}
+          w-1/2 py-3 rounded-md font-bold bg-dark_green`} type="submit">Salvar</button>
         </div>
       </form>
     </div>

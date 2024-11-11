@@ -1,6 +1,6 @@
 import { FaTrash} from 'react-icons/fa';
 import { MdEdit } from 'react-icons/md';
-import { editToggle } from '../scripts/toggle';
+import { editToggle} from '../scripts/toggle';
 import React from 'react';
 
 export interface CardExperienceProps 
@@ -20,17 +20,17 @@ const CardExperience: React.FC<CardExperienceProps> =
   return (
       <div className="items-start border-4 border-dark_green flex flex-col bg-card_color w-409 mx-3 my-3 relative
        text-secondary_text shadow-left-bottom ring-primary_color rounded-2xl p-5 h-503 justify-between flex-nowrap 
-        overflow-y-auto break-words overflow-x-hidden">
-        <div className='cardEdit absolute w-full text-7xl h-auto 
-        flex items-center justify-between flex-col top-0 left-0'>
+        break-words showEdition">
+        <div className='absolute w-full text-7xl h-auto 
+        flex items-center justify-between flex-col top-0 left-0 cardEdit'>
           <button onClick={editToggle} onFocus={onFocus}
-          className='bg-unspoken_color w-full h-1/2 flex justify-center items-center rounded-t-xl
-          hover:bg-secondary_text hover:text-unspoken_color transition duration-300 ease-in-out'>
+          className='bg-unspoken_color w-full h-1/2 flex justify-center items-center rounded-t-xl text-primary_color
+          hover:bg-primary_color hover:text-unspoken_color transition duration-300 ease-in-out'>
             <MdEdit />
           </button>
           <button onClick={onDelete} 
-          className='bg-main_red w-full h-1/2 flex justify-center items-center
-          hover:text-main_red hover:bg-secondary_text transition duration-300 ease-in-out rounded-b-xl'>
+          className='bg-main_red w-full h-1/2 flex justify-center items-center text-primary_color
+          hover:text-main_red hover:bg-primary_color transition duration-300 ease-in-out rounded-b-xl'>
             <FaTrash />
           </button>
         </div>

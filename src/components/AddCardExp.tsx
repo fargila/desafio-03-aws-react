@@ -5,7 +5,7 @@ const AddCardExp = () =>
 {   
     return (
         <div className="items-center border-4 border-dark_green flex flex-col bg-card_color mx-3 my-3 w-409 h-503
-        text-secondary_text shadow-left-bottom ring-primary_color rounded-2xl p-5 justify-center flex-wrap">
+        text-secondary_text shadow-left-bottom ring-primary_color rounded-2xl p-5 justify-center flex-wrap showEdit">
             <button onClick={toggle} 
             className="size-24 text-center w-full transition duration-300 ease-in-out text-3x ">
                 <button className="border-8 border-secondary_text rounded-full size-24 text-center hover:border-primary_color

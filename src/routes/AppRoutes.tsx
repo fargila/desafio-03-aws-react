@@ -5,8 +5,8 @@ import PortifolioPage from '../pages/PortifolioPage';
 const AppRoutes = () => {
   return (
     <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<PortifolioPage />} />
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/portifolio" element={<PortifolioPage />} />
     </Routes>
   )
 }

@@ -17,9 +17,9 @@ const LoginPage = () => {
             type="text" placeholder="Digite o @ do usuário" value={user}
             onChange={(e) => setUser(e.target.value)}/>
             <button className='w-1/12' disabled={!user.trim()}>
-              <Link to='/' className='flex items-center justify-center  w-full hover:bg-primary_color 
-              transition duration-300 ease-in-outbg-secondary_color text-secondary_text ml-3
-              rounded-xl border-dark_green bg-secondary_color p-3 border '>
+              <Link to='/' className={`flex items-center justify-center p-3 border w-full ml-3 hover:bg-primary_color 
+              rounded-xl ${!user.trim() ? 'bg-tertiary_text' :
+              'transition duration-300 ease-in-outbg-secondary_color text-secondary_text border-dark_green bg-secondary_color'} `}>
                 <FaArrowRight className='text-xl'/>
               </Link>
             </button>
@@ -32,18 +32,18 @@ const LoginPage = () => {
             </div>
           )}
         </div>
-        <div className='flex items-center justify-center'>
-          <hr className='border border-secondary_color w-2/4 border-t-2'></hr>
-          <p className='flex font-bold h-16 px-4 items-center text-lg'>ou</p>
-          <hr className='border border-secondary_color w-2/4 border-t-2'></hr>
-      </div>
-      </div>
-      <div className="flex items-center">
-        <p className='mr-3 font-bold text-lg'>Acesse sua conta com</p>
-        <div className="flex justify-between hover:cursor-pointer transition duration-300 ease-in-out
-        bg-dark_green text-secondary_text px-4 py-2 rounded-full hover:bg-primary_color">
-          <FaGithub className='flex max-w-max'/>
-          <p className='ml-2'>Github</p>
+          <div className='flex items-center justify-center'>
+            <hr className='border border-secondary_color w-2/4 border-t-2'></hr>
+            <p className='flex font-bold h-16 px-4 items-center text-lg'>ou</p>
+            <hr className='border border-secondary_color w-2/4 border-t-2'></hr>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <p className='mr-3 font-bold text-lg'>Acesse sua conta com</p>
+          <div className="flex justify-between hover:cursor-pointer transition duration-300 ease-in-out
+          bg-dark_green text-secondary_text px-4 py-2 rounded-full hover:bg-primary_color">
+            <FaGithub className='flex max-w-max'/>
+            <p className='ml-2'>Github</p>
         </div>
       </div>
     </div>

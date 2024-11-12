@@ -20,7 +20,7 @@ const EditLinks = () =>
           <button className=' bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
           absolute transition duration-300 ease-in-out hover:bg-primary_color smEditIcon' 
           onClick={socialLink}>
-            <MdEdit/>
+            <MdEdit aria-label='editLink'/>
           </button>
           <div className='relative mx-1'>
             <img src="/src/assets/images/Property 1=insta black.png" />
@@ -44,7 +44,7 @@ const EditLinks = () =>
           <button className=' bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
           absolute transition duration-300 ease-in-out hover:bg-primary_color smEditIcon' 
           onClick={socialLink}>
-            <MdEdit/>
+            <MdEdit aria-label='editLink'/>
           </button>
           <div className='relative mx-1'>
             <img src="/src/assets/images/Property 1=facebook black.png" />
@@ -68,7 +68,7 @@ const EditLinks = () =>
           <button className=' bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
           absolute transition duration-300 ease-in-out hover:bg-primary_color smEditIcon' 
           onClick={socialLink}>
-            <MdEdit/>
+            <MdEdit aria-label='editLink'/>
           </button>
           <div className='relative mx-1'>
             <img src="/src/assets/images/Property 1=twitter black.png" />
@@ -92,7 +92,7 @@ const EditLinks = () =>
         <button className='bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
         absolute transition duration-300 ease-in-out hover:bg-primary_color smEditIcon4' 
         onClick={socialLink}>
-          <MdEdit/>
+          <MdEdit aria-label='editLink'/>
         </button>
         <div className='relative mx-1'>
           <img src="/src/assets/images/Property 1=youtube black.png" />

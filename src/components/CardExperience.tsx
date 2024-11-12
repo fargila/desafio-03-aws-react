@@ -26,12 +26,12 @@ const CardExperience: React.FC<CardExperienceProps> =
         <button onClick={editToggle} onFocus={onFocus}
         className='bg-unspoken_color w-full h-1/2 flex justify-center items-center rounded-t-xl text-primary_color
         hover:bg-primary_color hover:text-unspoken_color transition duration-300 ease-in-out'>
-          <MdEdit />
+          <MdEdit aria-label='editCard'/>
         </button>
         <button onClick={onDelete} 
         className='bg-main_red w-full h-1/2 flex justify-center items-center text-primary_color
         hover:text-main_red hover:bg-primary_color transition duration-300 ease-in-out rounded-b-xl'>
-          <FaTrash />
+          <FaTrash aria-label='deleteCard'/>
         </button>
       </div>
 

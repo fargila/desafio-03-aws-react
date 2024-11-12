@@ -5,11 +5,10 @@ import CardExperience from '../components/CardExperience'
 import CreateCard from '../components/CreateCardExp';
 import AddCardExp from '../components/AddCardExp'
 import { edit, socialLink } from '../scripts/toggle';
-import AddLink from '../components/AddLink'
 import EditCardExp from '../components/EditCardExp'
 import { CardData } from '../components/CreateCardExp';
-import { Links } from '../components/AddLink';
 import Header from '../components/Header';
+import SocialLinks from '../components/SocialLinks'
 import axios from 'axios'
 
 interface User {
@@ -27,26 +26,27 @@ const PortifolioPage = () =>
   const [cards, setCards] = useState<CardData[]>([])
   const [cardIndex, setCardIndex] = useState(NaN)
   const [user, setUser] = useState<User>()
-  const [savedLinks, setSavedLinks] = useState<Links>({})
+  
+  const [extraEmail, setExtraEmail] = useState('')
+  const [isEditingExtraEmail, setIsEditingEmail] = useState(false)
+  const [history, setHistory] = useState('')
+  const [isEditingHistory, setIsEditingHistory] = useState(false)
+  
   //const [username, setUsername] = useState('')
   //const [error, setError] = useState('null')
 
   useEffect(() => {
     const fetchUser = async () => 
     {
-      try {
+      try 
+      {
         const response = await axios.get(`https://api.github.com/users/fargila`)
         setUser(response.data)
-      } catch (error) {
-        console.error('Erro:', error)
-      }
+      } catch (error) { console.error('Erro:', error) }
     }
   
     fetchUser()
   }, [])
-  
-  const saveLink = (platform: keyof Links, link: string) => 
-    { setSavedLinks((prevLinks) => ({ ...prevLinks, [platform]: link })) }
 
   const addNewCard = (newCard: CardData) => { setCards([...cards, newCard])}
 
@@ -57,13 +57,22 @@ const PortifolioPage = () =>
     setCards(updatedCards)
   }
 
-  const editCard = (index: number) => {
-    setCardIndex(index)
-  }
+  const editCard = (index: number) => { setCardIndex(index) }
 
   const deleteCard = (index: number) => { setCards(cards.filter((_, i) => i !== index)) }
   console.log(cardIndex)
-  console.log(savedLinks)
+
+  const handleSaveEmail = (value: string) => 
+  {
+    setExtraEmail(value)
+    setIsEditingEmail(false)
+  }
+
+  const handleSaveHistory = (value: string) => 
+  {
+    setHistory(value)
+    setIsEditingHistory(false)
+  }
   
   return (
     <>
@@ -106,23 +115,33 @@ const PortifolioPage = () =>
                 onClick={socialLink}><MdEdit/></button>
                 <button 
                 className='bg-dark_green text-2xl w-full py-3 rounded-2xl shadow-left-bottom ring-primary_color
-                hover:bg-primary_color transition duration-300 ease-in-out'>LinkIn</button>
+                hover:bg-primary_color transition duration-300 ease-in-out'>LinkedIn</button>
               </div>
             </div>
           </div>
         </div>
         <div className='bg-card_color text-secondary_text w-11/12 mt-20
-        flex flex-col justify-center items-center py-10 rounded-2xl' id='myHistory'>
-            <h2 className='text-5xl font-bold w-11/12 mb-12'>Minha história</h2>
-            <p className='text-xl font-medium w-11/12 text-tertiary_text hover:cursor-default
-             transition duration-800 ease-in-out border-transparent border-b-2 
-             hover:border-tertiary_text'>adicione sua história</p>
+        flex flex-col justify-center items-center py-10 rounded-2xl h-auto' id='myHistory'>
+          <h2 className='text-5xl font-bold w-11/12 mb-12'>Minha história</h2>
+          {isEditingHistory || history.length === 0 ? (
+            <textarea
+                className="hover:cursor-default bg-card_color text-xl h-full
+                placeholder:text-tertiary_text text-left items-start w-11/12 break-words"
+                autoFocus
+                placeholder="Adicione sua história"
+                value={history}
+                onChange={(e) => setHistory(e.target.value)}
+                onBlur={() => handleSaveHistory(history)}
+                onKeyDown={(e) => { if (e.key === "Enter") handleSaveHistory(history) }}/>
+            ) : (
+                <p className="w-11/12 hover:cursor-pointer text-xl text-left"
+                 onClick={() => setIsEditingHistory(true)}>{history}</p>
+            )}
         </div>
 
         <div className='blured'/>
         <CreateCard onAddCard={addNewCard}/>
         {cardIndex !== null && <EditCardExp card={cards[cardIndex]} index={cardIndex} onUpdateCard={updateCard}/>}
-        <AddLink onSaveLink={saveLink} />
         
         <div className='text-secondary_text bg-secondary_color w-full text-center mt-24 pb-20' id='exp'>
           <h1 className=' font-extrabold text-7xl py-10'>Experiências</h1>
@@ -140,77 +159,28 @@ const PortifolioPage = () =>
         </div>
       </body>
       
-      <footer className="text-primary_text h-auto">
-        <div className="bg-dark_green text-secondary_text py-32 flex flex-col items-center"  id='contact'>
+      <footer className="text-primary_text h-auto -z-20">
+        <div className="bg-dark_green text-secondary_text py-32 flex flex-col items-center" id='contact'>
           <h3 className="text-4xl font-semibold text-center">Sinta-se livre para me contatar a qualquer momento!</h3>
-          <h2 className="border-b-4 border-transparent hover:border-tertiary_text text-tertiary_text
-           text-5xl mt-10 font-bold hover:cursor-default transition duration-300 ease-in-out">Adicione um e-mail extra</h2>
+          <div className='text-5xl mt-10 font-bold border-b-4 border-transparent hover:border-tertiary_text
+          text-tertiary_text transition duration-300 ease-in-out'>
+          {isEditingExtraEmail || extraEmail.length === 0 ? (
+            <input
+            className="hover:cursor-default flex items-center bg-dark_green text-center
+            placeholder:text-tertiary_text outline-none showEdit" 
+            autoFocus placeholder="Adicione um email extra" onBlur={(e) => handleSaveEmail(e.target.value)}
+            onKeyDown={(e) => {if (e.key === "Enter") handleSaveEmail(e.currentTarget.value)}}/>
+          ) : (
+            <h2 className="hover:cursor-pointer h-4"
+            onClick={() => setIsEditingEmail(true)}>{extraEmail}</h2>
+          )}
+      </div>
         </div>
         <div className="flex flex-col items-center text-center">
           <h3 className="text-4xl w-3/4 font-medium my-28">Assim que possível
           , me envie um e-mail para que possamos trabalhar felizes juntos!</h3>
           <div className="flex justify-around text-secondary_text text-center">
-            <div className='relative showEdit'>
-              <button className='bg-card_color top-4 right-4 rounded-full size-5  flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
-              onClick={socialLink}>
-                <MdEdit/>
-              </button>
-              <div className='mx-1 relative'>
-                <img src="/src/assets/images/Property 1=insta black.png" />
-                <img className='absolute transition top-0 left-0 cursor-pointer
-                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                src="/src/assets/images/Property 1=insta color.png" alt="Instagram" />
-              </div>
-            </div>
-            <div className='relative showEdit'>
-              <button className='bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
-              onClick={socialLink}>
-                <MdEdit/>
-              </button>
-              <div className='relative mx-1'>
-                <img src="/src/assets/images/Property 1=facebook black.png" />
-                <img className='absolute transition top-0 left-0 cursor-pointer
-                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                src="/src/assets/images/Property 1=facebook color.png" alt="Facebook" />
-              </div>
-            </div>
-            <div className='relative showEdit'>
-              <button className=' bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
-              onClick={socialLink}>
-                <MdEdit/>
-              </button>
-              <div className='relative mx-1'>
-                <img src="/src/assets/images/Property 1=twitter black.png" />
-                <img className='absolute transition top-0 left-0 cursor-pointer
-                duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                src="/src/assets/images/Property 1=twitter color.png" alt="Twitter" />
-              </div>
-            </div>
-            <div className='relative showEdit'>
-              <button className='bg-card_color rounded-full size-5 top-4 right-4 flex justify-center items-center
-              absolute transition duration-300 ease-in-out hover:bg-primary_color z-10' 
-              onClick={socialLink}>
-                <MdEdit/>
-              </button>
-              { savedLinks.youtube ? (
-                <div className='relative mx-1 visible'>
-                  <img src="/src/assets/images/Property 1=youtube black.png" />
-                  <img className='absolute transition top-0 left-0 cursor-pointer 
-                  duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                  src="/src/assets/images/Property 1=youtube color.png" alt="Youtube"
-                  onClick={() => window.open(savedLinks.youtube)} />
-                </div>) : (
-                <div className='relative mx-1'>
-                  <img src="/src/assets/images/Property 1=youtube black.png" />
-                  <img className='absolute transition top-0 left-0 cursor-pointer
-                  duration-300 opacity-0 hover:opacity-100 ease-in-out hover:scale-110'
-                  src="/src/assets/images/Property 1=youtube color.png" alt="Youtube" />
-              </div>
-              )}
-            </div>
+            <SocialLinks/>
           </div>
           <div className="flex pt-12 pb-8 text-2xl font-medium w-3/4 justify-center">
             <div className="flex mr-20">

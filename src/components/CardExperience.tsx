@@ -18,22 +18,24 @@ const CardExperience: React.FC<CardExperienceProps> =
 ({projectName, duration, skills, description, repLink, onDelete, onFocus}) => 
 {
   return (
-      <div className="items-start border-4 border-dark_green flex flex-col bg-card_color w-409 mx-3 my-3 relative
+    <div className='relative z-0 items-start border-4 border-dark_green flex flex-col bg-card_color w-409 mx-3 my-3
        text-secondary_text shadow-left-bottom ring-primary_color rounded-2xl p-5 h-503 justify-between flex-nowrap 
-        break-words showEdition">
-        <div className='absolute w-full text-7xl h-auto 
-        flex items-center justify-between flex-col top-0 left-0 cardEdit'>
-          <button onClick={editToggle} onFocus={onFocus}
-          className='bg-unspoken_color w-full h-1/2 flex justify-center items-center rounded-t-xl text-primary_color
-          hover:bg-primary_color hover:text-unspoken_color transition duration-300 ease-in-out'>
-            <MdEdit />
-          </button>
-          <button onClick={onDelete} 
-          className='bg-main_red w-full h-1/2 flex justify-center items-center text-primary_color
-          hover:text-main_red hover:bg-primary_color transition duration-300 ease-in-out rounded-b-xl'>
-            <FaTrash />
-          </button>
-        </div>
+        break-words '>
+      <div className='absolute  text-7xl h-auto z-20 
+      flex items-center justify-between flex-col top-0 left-0 cardEdit'>
+        <button onClick={editToggle} onFocus={onFocus}
+        className='bg-unspoken_color w-full h-1/2 flex justify-center items-center rounded-t-xl text-primary_color
+        hover:bg-primary_color hover:text-unspoken_color transition duration-300 ease-in-out'>
+          <MdEdit />
+        </button>
+        <button onClick={onDelete} 
+        className='bg-main_red w-full h-1/2 flex justify-center items-center text-primary_color
+        hover:text-main_red hover:bg-primary_color transition duration-300 ease-in-out rounded-b-xl'>
+          <FaTrash />
+        </button>
+      </div>
+
+      <div className="showEdition z-20">
         <div className="text-start flex flex-col flex-wrap">
           <h1 className="text-3xl font-bold w-fit">{projectName}</h1>
           <p className="text-tertiary_text text-lg font-normal py-2 w-fit">{duration}</p>
@@ -57,6 +59,7 @@ const CardExperience: React.FC<CardExperienceProps> =
           </div>
         ) : ( <div className='invisible'></div> )}
       </div>
+    </div>
   )
 }
 

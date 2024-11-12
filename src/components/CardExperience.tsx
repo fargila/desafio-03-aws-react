@@ -35,7 +35,7 @@ const CardExperience: React.FC<CardExperienceProps> =
         </button>
       </div>
 
-      <div className="showEdition z-20">
+      <div className="showEdition z-10 w-full">
         <div className="text-start flex flex-col flex-wrap">
           <h1 className="text-3xl font-bold w-fit">{projectName}</h1>
           <p className="text-tertiary_text text-lg font-normal py-2 w-fit">{duration}</p>
